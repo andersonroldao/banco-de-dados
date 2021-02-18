@@ -1,0 +1,36 @@
+CREATE DATABASE db_Clientes
+USE db_Clientes
+
+CREATE TABLE cliente (
+    id_cliente INT NOT NULL IDENTITY PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL DEFAULT '',
+    CPF VARCHAR(20) NOT NULL UNIQUE,
+    telefone VARCHAR(20) NOT NULL,
+    logradouro VARCHAR(50) NOT NULL,
+    num_Logradouro VARCHAR(10) NOT NULL,
+    bairro VARCHAR(50) NOT NULL,
+    cidade VARCHAR(50) NOT NULL,
+    estado VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE produto (
+    id_produto INT NOT NULL IDENTITY PRIMARY KEY,
+    valor REAL NOT NULL,
+    quantidade INT NOT NULL,
+    id_cliente INT NOT NULL,
+    CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente) REFERENCES cliente (id_cliente)
+);
+
+INSERT INTO cliente (nome, CPF, telefone, logradouro, num_Logradouro, bairro, cidade, estado)
+VALUES
+('João Alberto', '02537868721', '55993548537','Cecília Meireles', '157', 'João Pessoa', 'Rio dos Patos', 'Paraná'),
+('João Pedro', '02897868721', '83991234537','Cecílo', '15', 'Joana', 'Patinhos', 'Pará'),
+('Joana Daulisio', '03285768721', '72985548537','DR Elias', '60', 'Salto do boi', 'Dois Irmaos', 'Minas Gerais');
+
+INSERT INTO produto (valor, quantidade, id_cliente)
+VALUES
+('15.53', '2', 3),
+('17.31', '1', 4),
+('152.17', '4', 5);
+
+SELECT Max(valor) from produto
